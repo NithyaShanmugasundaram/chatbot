@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import Header from './components/Header';
+import ChatList from './components/ChatList';
+import UserInput from './components/UserInput';
+import {tempData} from './data';
 import './App.css';
+class App extends Component {
+  state = { 
+    data:[],
+    input:""
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+   }
+   componentDidMount(){
+     this.setState({data:tempData})
+   }
+   handleSubmit=()=>{
+    console.log(this.state);
+   }
+   handleChange=(e)=>{
+    this.setState({input:e.target.value})
+   }
+  render() { 
+    return ( <div className="app">       
+     <Header />        
+     <ChatList  chats={this.state.data}/>        
+     <UserInput chat={this.state.input}
+           onSubmit={this.handleSubmit} 
+           onChange={this.handleChange} 
+           value={this.state.input} />    
+     </div>   
+      )  } 
+  
 }
-
+ 
 export default App;
+
